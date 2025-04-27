@@ -1,11 +1,11 @@
 {
   "$schema": "https://mintlify.com/docs.json",
   "theme": "mint",
-  "name": "Mint Starter Kit",
+  "name": "Push API",
   "colors": {
-    "primary": "#16A34A",
-    "light": "#07C983",
-    "dark": "#15803D"
+    "primary": "#625fff",
+    "light": "#625fff",
+    "dark": "#625fff"
   },
   "favicon": "/favicon.svg",
   "navigation": {
@@ -38,18 +38,53 @@
         "tab": "API Reference",
         "groups": [
           {
-            "group": "API Documentation",
+            "group": "Getting Started",
             "pages": [
-              "api-reference/introduction"
+              "api-reference/quickstart"
             ]
           },
           {
-            "group": "Endpoint Examples",
+            "group": "API Documentation",
             "pages": [
-              "api-reference/endpoint/get",
-              "api-reference/endpoint/create",
-              "api-reference/endpoint/delete",
-              "api-reference/endpoint/webhook"
+              "api-reference/introduction",
+              "api-reference/authentication",
+              "api-reference/setup",
+              "api-reference/push-credentials",
+              "api-reference/device-registration",
+              "api-reference/send-message",
+              "api-reference/preferences",
+              "api-reference/message-status"
+            ]
+          },
+          {
+            "group": "Devices",
+            "pages": [
+              "api-reference/endpoint/register-device",
+              "api-reference/endpoint/get-device",
+              "api-reference/endpoint/delete-device"
+            ]
+          },
+          {
+            "group": "Messages",
+            "pages": [
+              "api-reference/endpoint/send-message",
+              "api-reference/endpoint/list-messages",
+              "api-reference/endpoint/get-message"
+            ]
+          },
+          {
+            "group": "Preferences",
+            "pages": [
+              "api-reference/endpoint/get-user-preferences",
+              "api-reference/endpoint/update-user-preferences",
+              "api-reference/endpoint/get-device-preferences",
+              "api-reference/endpoint/update-device-preferences"
+            ]
+          },
+          {
+            "group": "Webhooks",
+            "pages": [
+              "api-reference/endpoint/register-webhook"
             ]
           }
         ]

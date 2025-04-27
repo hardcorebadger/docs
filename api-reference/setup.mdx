@@ -1,0 +1,144 @@
+---
+title: 'Setup'
+description: 'Get started with Push API'
+icon: 'wrench'
+---
+
+## Installation
+
+### Backend
+
+<Tabs>
+  <Tab title="Node.js">
+    ```bash
+    # Using npm
+    npm install @push/api
+
+    # Using yarn
+    yarn add @push/api
+    ```
+  </Tab>
+  <Tab title="Python">
+    ```bash
+    # Using pip
+    pip install push-api
+
+    # Using poetry
+    poetry add push-api
+    ```
+  </Tab>
+  <Tab title="Ruby">
+    ```bash
+    # Using bundler
+    bundle add push-api
+
+    # Using gem
+    gem install push-api
+    ```
+  </Tab>
+</Tabs>
+
+## Configuration
+
+### 1. Get Your API Key
+
+1. Create an account at [Push Dashboard](https://dashboard.push.com)
+2. Navigate to Settings > API Keys
+3. Create a new API key
+4. Copy your API key
+
+### 2. Configure Your Backend
+
+<Tabs>
+  <Tab title="Node.js">
+    ```javascript
+    // Initialize the client
+    const pushApi = require('@push/api');
+
+    // Configure with your API key
+    pushApi.configure({
+      apiKey: process.env.PUSH_API_KEY
+    });
+    ```
+  </Tab>
+  <Tab title="Python">
+    ```python
+    from push_api import PushAPI
+
+    # Initialize the client
+    push_api = PushAPI(api_key=os.getenv('PUSH_API_KEY'))
+    ```
+  </Tab>
+  <Tab title="Ruby">
+    ```ruby
+    require 'push-api'
+
+    # Initialize the client
+    PushAPI.configure do |config|
+      config.api_key = ENV['PUSH_API_KEY']
+    end
+    ```
+  </Tab>
+</Tabs>
+
+### 3. Set Up Environment Variables
+
+Add your API key to your environment variables:
+
+```bash
+# .env file
+PUSH_API_KEY=your_api_key_here
+```
+
+<Note>
+  Never commit your API key to version control. Always use environment variables.
+</Note>
+
+## Testing Your Setup
+
+Verify your setup by sending a test notification:
+
+<Tabs>
+  <Tab title="Node.js">
+    ```javascript
+    // Send a test notification
+    await pushApi.sendMessage({
+      userId: 'test_user',
+      title: 'Test Notification',
+      body: 'If you see this, your setup is working!'
+    });
+    ```
+  </Tab>
+  <Tab title="Python">
+    ```python
+    # Send a test notification
+    push_api.send_message(
+      user_id='test_user',
+      title='Test Notification',
+      body='If you see this, your setup is working!'
+    )
+    ```
+  </Tab>
+  <Tab title="Ruby">
+    ```ruby
+    # Send a test notification
+    PushAPI.send_message(
+      user_id: 'test_user',
+      title: 'Test Notification',
+      body: 'If you see this, your setup is working!'
+    )
+    ```
+  </Tab>
+</Tabs>
+
+## Next Steps
+
+- [Register Devices](/api-reference/device-registration)
+- [Send Notifications](/api-reference/send-message)
+- [Manage Preferences](/api-reference/preferences)
+
+## Need Help?
+
+- [Quick Start Guide](/api-reference/quickstart)
+- [API Reference](/api-reference)
+- [Support](mailto:support@push.com) 

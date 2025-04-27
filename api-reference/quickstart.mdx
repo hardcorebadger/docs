@@ -1,0 +1,176 @@
+---
+title: 'Quickstart'
+description: 'Get started with Push API in minutes'
+icon: 'rocket'
+---
+
+## Overview
+
+Push API makes it easy to send push notifications to iOS, Android, and web applications. This guide will walk you through setting up your account, registering a device, and sending your first push notification.
+
+## Prerequisites
+
+Before you begin, you'll need:
+
+1. **iOS Push Notifications**
+   - Apple Developer Account
+   - Push Notification Certificate (APNs)
+   - Bundle Identifier for your app
+
+2. **Android Push Notifications**
+   - Firebase Project
+   - Firebase Cloud Messaging (FCM) Server Key
+   - Package name for your app
+
+3. **Web Push Notifications**
+   - Web Push Certificate (VAPID)
+   - Website URL
+
+## Setup
+
+### 1. Create an Account
+
+First, create an account at [Push Dashboard](https://dashboard.push.com) and get your API key.
+
+### 2. Configure Platform Credentials
+
+<AccordionGroup>
+  <Accordion title="iOS Setup" icon="apple">
+    To set up iOS push notifications:
+    1. Log in to your Apple Developer Account
+    2. Create an APNs key in Certificates, Identifiers & Profiles
+    3. Download the key and note the Key ID
+    4. Add the key to your Push dashboard
+  </Accordion>
+
+  <Accordion title="Android Setup" icon="android">
+    To set up Android push notifications:
+    1. Create a Firebase project
+    2. Add your Android app to the project
+    3. Get the FCM Server Key from Project Settings
+    4. Add the key to your Push dashboard
+  </Accordion>
+
+  <Accordion title="Web Setup" icon="globe">
+    To set up web push notifications:
+    1. Generate a VAPID key pair
+    2. Add your website URL
+    3. Add the keys to your Push dashboard
+  </Accordion>
+</AccordionGroup>
+
+## Register a Device
+
+To send push notifications, you need to register each user's device. Here's how to do it:
+
+```bash
+curl -X PUT https://api.push.com/v1/devices/{userId}/{deviceIdentifier} \
+  -H "Authorization: Bearer YOUR_API_KEY" \
+  -H "Content-Type: application/json" \
+  -d '{
+    "deviceToken": "device_token_here",
+    "platform": "ios"
+  }'
+```
+
+<Note>
+  The `platform` field can be one of: `ios`, `android`, or `web`
+</Note>
+
+## Set Up Preferences
+
+You can set up notification preferences at both the user and device level:
+
+### User Preferences
+
+```bash
+curl -X PUT https://api.push.com/v1/users/{userId}/preferences \
+  -H "Authorization: Bearer YOUR_API_KEY" \
+  -H "Content-Type: application/json" \
+  -d '{
+    "enabled": true,
+    "categories": {
+      "marketing": true,
+      "security": true,
+      "transaction": false
+    }
+  }'
+```
+
+### Device Preferences
+
+```bash
+curl -X PUT https://api.push.com/v1/devices/{userId}/{deviceIdentifier}/preferences \
+  -H "Authorization: Bearer YOUR_API_KEY" \
+  -H "Content-Type: application/json" \
+  -d '{
+    "enabled": true,
+    "categories": {
+      "marketing": true,
+      "security": true,
+      "transaction": false
+    }
+  }'
+```
+
+## Send Your First Push
+
+Now that you've registered a device, you can send your first push notification:
+
+```bash
+curl -X POST https://api.push.com/v1/messages \
+  -H "Authorization: Bearer YOUR_API_KEY" \
+  -H "Content-Type: application/json" \
+  -d '{
+    "userId": "user123",
+    "title": "Hello!",
+    "body": "This is your first push notification",
+    "platform": "ios",
+    "category": "marketing"
+  }'
+```
+
+## Check Message Status
+
+You can check the status of your messages:
+
+```bash
+# List all messages
+curl -X GET https://api.push.com/v1/messages?userId=user123 \
+  -H "Authorization: Bearer YOUR_API_KEY"
+
+# Get specific message
+curl -X GET https://api.push.com/v1/messages/{messageId} \
+  -H "Authorization: Bearer YOUR_API_KEY"
+```
+
+## Next Steps
+
+- Learn about [message customization](/api-reference/messages)
+- Set up [webhooks](/api-reference/webhooks) for delivery tracking
+- Explore [advanced features](/api-reference/advanced)
+
+## Common Issues
+
+<AccordionGroup>
+  <Accordion title="Device Registration Fails" icon="exclamation-triangle">
+    Common causes:
+    - Invalid device token
+    - Incorrect platform specification
+    - API key issues
+  </Accordion>
+
+  <Accordion title="Push Not Received" icon="exclamation-triangle">
+    Common causes:
+    - Device not registered
+    - Invalid credentials
+    - Platform-specific issues
+    - Preferences disabled
+  </Accordion>
+</AccordionGroup>
+
+## Need Help?
+
+- Check our [API Reference](/api-reference)
+- Join our [Community](https://community.push.com)
+- Contact [Support](mailto:support@push.com) 

@@ -1,0 +1,204 @@
+---
+title: 'Send Messages'
+description: 'Learn how to send push notifications to your users'
+icon: 'paper-plane'
+---
+
+## Sending Messages
+
+Send push notifications to your users with a simple API call:
+
+<Tabs>
+  <Tab title="Node.js">
+    ```javascript
+    // Send a notification
+    await pushApi.sendMessage({
+      userId: 'user123',
+      title: 'Hello!',
+      body: 'This is a push notification'
+    });
+    ```
+  </Tab>
+  <Tab title="Python">
+    ```python
+    # Send a notification
+    push_api.send_message(
+      user_id='user123',
+      title='Hello!',
+      body='This is a push notification'
+    )
+    ```
+  </Tab>
+  <Tab title="Ruby">
+    ```ruby
+    # Send a notification
+    PushAPI.send_message(
+      user_id: 'user123',
+      title: 'Hello!',
+      body: 'This is a push notification'
+    )
+    ```
+  </Tab>
+</Tabs>
+
+## Advanced Options
+
+### Platform-Specific Messages
+
+Send to a specific platform or device:
+
+<Tabs>
+  <Tab title="Node.js">
+    ```javascript
+    // Send to specific platform
+    await pushApi.sendMessage({
+      userId: 'user123',
+      title: 'iOS Only',
+      body: 'This will only go to iOS devices',
+      platform: 'ios'
+    });
+
+    // Send to specific device
+    await pushApi.sendMessage({
+      userId: 'user123',
+      deviceId: 'device_123',
+      title: 'Specific Device',
+      body: 'This will only go to one device'
+    });
+    ```
+  </Tab>
+  <Tab title="Python">
+    ```python
+    # Send to specific platform
+    push_api.send_message(
+      user_id='user123',
+      title='iOS Only',
+      body='This will only go to iOS devices',
+      platform='ios'
+    )
+
+    # Send to specific device
+    push_api.send_message(
+      user_id='user123',
+      device_id='device_123',
+      title='Specific Device',
+      body='This will only go to one device'
+    )
+    ```
+  </Tab>
+  <Tab title="Ruby">
+    ```ruby
+    # Send to specific platform
+    PushAPI.send_message(
+      user_id: 'user123',
+      title: 'iOS Only',
+      body: 'This will only go to iOS devices',
+      platform: 'ios'
+    )
+
+    # Send to specific device
+    PushAPI.send_message(
+      user_id: 'user123',
+      device_id: 'device_123',
+      title: 'Specific Device',
+      body: 'This will only go to one device'
+    )
+    ```
+  </Tab>
+</Tabs>
+
+### Category-Based Messages
+
+Send messages to users based on their notification preferences:
+
+<Tabs>
+  <Tab title="Node.js">
+    ```javascript
+    // Send marketing message
+    await pushApi.sendMessage({
+      userId: 'user123',
+      title: 'Special Offer',
+      body: 'Check out our new products',
+      category: 'marketing'
+    });
+
+    // Send security message
+    await pushApi.sendMessage({
+      userId: 'user123',
+      title: 'Security Alert',
+      body: 'New login detected',
+      category: 'security'
+    });
+    ```
+  </Tab>
+  <Tab title="Python">
+    ```python
+    # Send marketing message
+    push_api.send_message(
+      user_id='user123',
+      title='Special Offer',
+      body='Check out our new products',
+      category='marketing'
+    )
+
+    # Send security message
+    push_api.send_message(
+      user_id='user123',
+      title='Security Alert',
+      body='New login detected',
+      category='security'
+    )
+    ```
+  </Tab>
+  <Tab title="Ruby">
+    ```ruby
+    # Send marketing message
+    PushAPI.send_message(
+      user_id: 'user123',
+      title: 'Special Offer',
+      body: 'Check out our new products',
+      category: 'marketing'
+    )
+
+    # Send security message
+    PushAPI.send_message(
+      user_id: 'user123',
+      title: 'Security Alert',
+      body='New login detected',
+      category: 'security'
+    )
+    ```
+  </Tab>
+</Tabs>
+
+<Note>
+  Messages with categories will only be sent if the user has enabled that category in their [preferences](/api-reference/preferences).
+</Note>
+
+## Message Options
+
+- `userId`: The user to send the notification to
+- `title`: The notification title
+- `body`: The notification message
+- `platform`: Optional platform to target (ios, android, web)
+- `deviceId`: Optional specific device to target
+- `category`: Optional category to respect user preferences
+
+## Best Practices
+
+1. **Keep Messages Clear**
+   - Use short, clear titles
+   - Keep the body concise
+   - Include a call to action
+
+2. **Respect User Preferences**
+   - Use categories appropriately
+   - Check user preferences before sending
+   - Allow easy opt-out
+
+## Need Help?
+
+- [Quick Start Guide](/api-reference/quickstart)
+- [User Preferences](/api-reference/preferences)
+- [API Reference](/api-reference)
+- [Support](mailto:support@push.com) 

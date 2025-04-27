@@ -1,0 +1,171 @@
+---
+title: 'User Preferences'
+description: 'Manage notification preferences for your users'
+icon: 'user'
+---
+
+## Preference Model
+
+Push API uses a two-level preference system that's completely optional. By default, all notifications are enabled:
+
+1. **User Preferences**: Global settings for all user's devices
+2. **Device Preferences**: Settings for specific devices
+
+<Note>
+  If no preferences are set, all notifications are enabled by default. You only need to set preferences when you want to restrict notifications.
+</Note>
+
+### User Preferences
+
+Set and update global user preferences:
+
+<Tabs>
+  <Tab title="Node.js">
+    ```javascript
+    // Get user preferences
+    const preferences = await pushApi.getUserPreferences('user123');
+
+    // Update user preferences
+    await pushApi.updateUserPreferences('user123', {
+      enabled: true,
+      categories: {
+        news: true,
+        promotions: false,
+        updates: true
+      }
+    });
+    ```
+  </Tab>
+  <Tab title="Python">
+    ```python
+    # Get user preferences
+    preferences = push_api.get_user_preferences('user123')
+
+    # Update user preferences
+    push_api.update_user_preferences('user123', {
+        'enabled': True,
+        'categories': {
+            'news': True,
+            'promotions': False,
+            'updates': True
+        }
+    })
+    ```
+  </Tab>
+  <Tab title="Ruby">
+    ```ruby
+    # Get user preferences
+    preferences = PushAPI.get_user_preferences('user123')
+
+    # Update user preferences
+    PushAPI.update_user_preferences('user123',
+      enabled: true,
+      categories: {
+        news: true,
+        promotions: false,
+        updates: true
+      }
+    )
+    ```
+  </Tab>
+</Tabs>
+
+### Device Preferences
+
+Set and update preferences for specific devices:
+
+<Tabs>
+  <Tab title="Node.js">
+    ```javascript
+    // Get device preferences
+    const preferences = await pushApi.getDevicePreferences('user123', 'device_123');
+
+    // Update device preferences
+    await pushApi.updateDevicePreferences('user123', 'device_123', {
+      enabled: true,
+      categories: {
+        news: true,
+        promotions: false,
+        updates: true
+      }
+    });
+    ```
+  </Tab>
+  <Tab title="Python">
+    ```python
+    # Get device preferences
+    preferences = push_api.get_device_preferences('user123', 'device_123')
+
+    # Update device preferences
+    push_api.update_device_preferences('user123', 'device_123', {
+        'enabled': True,
+        'categories': {
+            'news': True,
+            'promotions': False,
+            'updates': True
+        }
+    })
+    ```
+  </Tab>
+  <Tab title="Ruby">
+    ```ruby
+    # Get device preferences
+    preferences = PushAPI.get_device_preferences('user123', 'device_123')
+
+    # Update device preferences
+    PushAPI.update_device_preferences('user123', 'device_123',
+      enabled: true,
+      categories: {
+        news: true,
+        promotions: false,
+        updates: true
+      }
+    )
+    ```
+  </Tab>
+</Tabs>
+
+## How Preferences Work
+
+1. **Default Behavior**
+   - If no preferences exist: All notifications are enabled
+   - If only user preferences exist: Device inherits user preferences
+   - If both exist: Both levels are checked
+
+2. **Preference Hierarchy**
+   - User preferences are checked first (if they exist)
+   - Device preferences are checked second (if they exist)
+   - A notification is only blocked if explicitly disabled at either level
+
+3. **Category System**
+   - Categories are user-defined strings
+   - Use consistent category names across your application
+   - If a category isn't specified: It's enabled by default
+
+<Note>
+  When sending messages, you can specify a category to respect these preferences. See [Sending Messages](/api-reference/send-message) for details.
+</Note>
+
+## Best Practices
+
+1. **Respect User Choices**
+   - Check preferences before sending
+   - Allow easy opt-out
+   - Provide clear category descriptions
+
+2. **Default Settings**
+   - Start with all notifications enabled
+   - Only set preferences when needed
+   - Keep marketing opt-in
+
+3. **Device Management**
+   - Update preferences when devices change
+   - Handle multiple devices per user
+   - Clean up old device preferences
+
+## Need Help?
+
+- [Quick Start Guide](/api-reference/quickstart)
+- [Sending Messages](/api-reference/send-message)
+- [API Reference](/api-reference)
+- [Support](mailto:support@push.com) 

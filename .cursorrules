@@ -1,0 +1,207 @@
+# Mintlify Documentation Rules
+
+## File Structure
+- All documentation files must be in MDX format
+- Each file must start with frontmatter (between ---)
+- Required frontmatter fields:
+  - title: Page title
+  - description: Brief description
+  - icon: (optional) Icon for the page
+
+## OpenAPI Specification
+- Place OpenAPI spec in `api-reference/openapi.json`
+- Structure the spec with:
+  ```json
+  {
+    "openapi": "3.0.0",
+    "info": {
+      "title": "API Name",
+      "version": "1.0.0",
+      "description": "API description"
+    },
+    "servers": [
+      {
+        "url": "https://api.example.com/v1",
+        "description": "Production server"
+      }
+    ],
+    "paths": {
+      "/endpoint": {
+        "method": {
+          "summary": "Endpoint summary",
+          "description": "Detailed description",
+          "operationId": "uniqueId",
+          "requestBody": {
+            "required": true,
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "required": ["field1", "field2"],
+                  "properties": {
+                    "field1": {
+                      "type": "string",
+                      "description": "Field description"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "responses": {
+            "200": {
+              "description": "Success response",
+              "content": {
+                "application/json": {
+                  "schema": {
+                    "type": "object",
+                    "properties": {
+                      "id": {
+                        "type": "string",
+                        "description": "Response field"
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+  ```
+- Reference OpenAPI endpoints in MDX files using:
+  ```mdx
+  ---
+  title: 'Endpoint Name'
+  openapi: 'METHOD /path'
+  ---
+  ```
+
+## Navigation Configuration
+- Update `docs.json` to include new pages in navigation
+- Structure navigation with tabs and groups:
+  ```json
+  "navigation": {
+    "tabs": [
+      {
+        "tab": "Tab Name",
+        "groups": [
+          {
+            "group": "Group Name",
+            "pages": [
+              "path/to/page"
+            ]
+          }
+        ]
+      }
+    ]
+  }
+  ```
+- Keep related pages grouped together
+- Use logical hierarchy in navigation
+- Update navigation when adding new pages
+
+## Writing Style
+- Use clear, concise language
+- Keep paragraphs short and focused
+- Use active voice
+- Avoid jargon unless necessary
+- Include examples for complex concepts
+
+## Headers
+- Use ## for main sections
+- Use ### for subsections
+- Each header creates an anchor and appears in table of contents
+- Keep header hierarchy logical and consistent
+
+## Code Documentation
+- Use triple backticks with language specification
+- Include filename when relevant: ```language filename
+- Document all parameters and return values
+- Include example requests and responses
+- Show error cases and handling
+
+## API Reference
+- Document each endpoint with:
+  - HTTP method
+  - URL
+  - Request parameters
+  - Response format
+  - Example requests/responses
+  - Error handling
+- Include authentication requirements
+- Document rate limits and quotas
+
+## Components
+- Use CardGroup and Card for navigation
+- Use AccordionGroup and Accordion for expandable content
+- Use Note for important information
+- Use Tip for helpful hints
+- Use Latex for mathematical equations
+
+## Links
+- Use root-relative paths for internal links: [text](/path/to/page)
+- Use full URLs for external links: [text](https://url.com)
+- Avoid relative paths (../) for internal links
+
+## Images
+- Use relative paths: /images/filename.png
+- Include alt text for accessibility
+- Support dark/light mode with className
+- Optimize images for web
+
+## Code Examples
+- Include examples in multiple languages
+- Show both successful and error cases
+- Include authentication examples
+- Keep examples simple and focused
+
+## Best Practices
+- Keep documentation in sync with API
+- Document breaking changes
+- Maintain changelog
+- Review and test all code examples
+- Verify all links and references
+
+## Development Workflow
+- Install Mintlify CLI: npm i -g mintlify
+- Run local preview: mintlify dev
+- Preview changes before pushing
+- Push changes to trigger deployment
+
+## Quality Checks
+- Check for broken links
+- Verify code examples work
+- Ensure consistent formatting
+- Test in both light and dark modes
+- Verify mobile responsiveness
+
+## Security
+- Never include sensitive information
+- Use placeholder values for API keys
+- Document security requirements
+- Include authentication examples
+- Document rate limits and quotas
+
+## Accessibility
+- Include alt text for images
+- Use semantic HTML
+- Ensure proper heading hierarchy
+- Use descriptive link text
+- Maintain good color contrast
+
+## Performance
+- Optimize images
+- Minimize use of large components
+- Keep code examples concise
+- Use efficient navigation structure
+- Avoid unnecessary nesting
+
+## Maintenance
+- Keep documentation up to date
+- Document deprecations
+- Maintain version history
+- Update examples regularly
+- Review and update regularly 

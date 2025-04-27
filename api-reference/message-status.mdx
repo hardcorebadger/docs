@@ -1,0 +1,179 @@
+---
+title: 'Message Status'
+description: 'Track the delivery status of your push notifications'
+icon: 'bell'
+---
+
+## Tracking Message Status
+
+You can track the delivery status of your push notifications in two ways:
+
+1. **Webhooks**: Receive real-time updates when messages are delivered
+2. **Polling**: Check message status on demand
+
+## Webhooks
+
+Set up a webhook to receive delivery status updates in real-time:
+
+<Tabs>
+  <Tab title="Node.js">
+    ```javascript
+    // Configure webhook URL
+    await pushApi.configureWebhook({
+      url: 'https://your-backend.com/webhook',
+      events: ['delivered', 'failed']
+    });
+
+    // Handle webhook events
+    app.post('/webhook', (req, res) => {
+      const { messageId, status, error } = req.body;
+      
+      switch (status) {
+        case 'delivered':
+          console.log(`Message ${messageId} was delivered`);
+          break;
+        case 'failed':
+          console.log(`Message ${messageId} failed: ${error}`);
+          break;
+      }
+      
+      res.status(200).send();
+    });
+    ```
+  </Tab>
+  <Tab title="Python">
+    ```python
+    # Configure webhook URL
+    push_api.configure_webhook(
+      url='https://your-backend.com/webhook',
+      events=['delivered', 'failed']
+    )
+
+    # Handle webhook events
+    @app.route('/webhook', methods=['POST'])
+    def webhook():
+        data = request.json
+        message_id = data['messageId']
+        status = data['status']
+        error = data.get('error')
+        
+        if status == 'delivered':
+            print(f"Message {message_id} was delivered")
+        elif status == 'failed':
+            print(f"Message {message_id} failed: {error}")
+            
+        return '', 200
+    ```
+  </Tab>
+  <Tab title="Ruby">
+    ```ruby
+    # Configure webhook URL
+    PushAPI.configure_webhook(
+      url: 'https://your-backend.com/webhook',
+      events: ['delivered', 'failed']
+    )
+
+    # Handle webhook events
+    post '/webhook' do
+      data = JSON.parse(request.body.read)
+      message_id = data['messageId']
+      status = data['status']
+      error = data['error']
+      
+      case status
+      when 'delivered'
+        puts "Message #{message_id} was delivered"
+      when 'failed'
+        puts "Message #{message_id} failed: #{error}"
+      end
+      
+      status 200
+    end
+    ```
+  </Tab>
+</Tabs>
+
+### Webhook Events
+
+- `delivered`: Message was successfully delivered
+- `failed`: Message failed to deliver
+- `opened`: User opened the notification
+- `clicked`: User clicked the notification
+
+## Polling
+
+Check message status on demand:
+
+<Tabs>
+  <Tab title="Node.js">
+    ```javascript
+    // Get message status
+    const status = await pushApi.getMessageStatus('msg_123');
+    console.log(`Message status: ${status.status}`);
+
+    // List recent messages
+    const messages = await pushApi.listMessages({
+      userId: 'user123',
+      limit: 10
+    });
+    ```
+  </Tab>
+  <Tab title="Python">
+    ```python
+    # Get message status
+    status = push_api.get_message_status('msg_123')
+    print(f"Message status: {status['status']}")
+
+    # List recent messages
+    messages = push_api.list_messages(
+      user_id='user123',
+      limit=10
+    )
+    ```
+  </Tab>
+  <Tab title="Ruby">
+    ```ruby
+    # Get message status
+    status = PushAPI.get_message_status('msg_123')
+    puts "Message status: #{status['status']}"
+
+    # List recent messages
+    messages = PushAPI.list_messages(
+      user_id: 'user123',
+      limit: 10
+    )
+    ```
+  </Tab>
+</Tabs>
+
+## Status Types
+
+- `sent`: Message was sent to the push service
+- `delivered`: Message was delivered to the device
+- `failed`: Message failed to deliver
+- `opened`: User opened the notification
+- `clicked`: User clicked the notification
+
+## Best Practices
+
+1. **Webhook Setup**
+   - Use HTTPS for your webhook URL
+   - Handle retries gracefully
+   - Validate webhook signatures
+
+2. **Status Tracking**
+   - Log important status changes
+   - Set up alerts for failures
+   - Monitor delivery rates
+
+3. **Error Handling**
+   - Check error messages for details
+   - Implement retry logic
+   - Track failure patterns
+
+## Need Help?
+
+- [Quick Start Guide](/api-reference/quickstart)
+- [Sending Messages](/api-reference/send-message)
+- [API Reference](/api-reference)
+- [Support](mailto:support@push.com) 

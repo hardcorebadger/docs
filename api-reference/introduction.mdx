@@ -1,33 +1,118 @@
 ---
 title: 'Introduction'
-description: 'Example section for showcasing API endpoints'
+description: 'Learn about Push API and how to integrate push notifications into your applications'
+icon: 'bell'
 ---
 
-<Note>
-  If you're not looking to build API reference documentation, you can delete
-  this section by removing the api-reference folder.
-</Note>
+## What is Push API?
 
-## Welcome
+Push API is a powerful service that enables you to send push notifications to iOS, Android, and web applications. It provides a unified interface for managing push notifications across multiple platforms, making it easy to engage with your users through timely and relevant notifications.
 
-There are two ways to build API documentation: [OpenAPI](https://mintlify.com/docs/api-playground/openapi/setup) and [MDX components](https://mintlify.com/docs/api-playground/mdx/configuration). For the starter kit, we are using the following OpenAPI specification.
+## Key Features
+
+<CardGroup cols={2}>
+  <Card
+    title="Multi-Platform Support"
+    icon="devices"
+    href="/api-reference/quickstart"
+  >
+    Send notifications to iOS, Android, and web applications using a single API
+  </Card>
+  <Card
+    title="User Preferences"
+    icon="settings"
+    href="/api-reference/endpoint/update-user-preferences"
+  >
+    Manage notification preferences at both user and device levels
+  </Card>
+  <Card
+    title="Delivery Tracking"
+    icon="chart"
+    href="/api-reference/endpoint/get-message"
+  >
+    Track message delivery status and user engagement
+  </Card>
+  <Card
+    title="Webhooks"
+    icon="webhook"
+    href="/api-reference/webhooks"
+  >
+    Receive real-time updates about message delivery and user interactions
+  </Card>
+</CardGroup>
+
+## Getting Started
+
+To start using Push API, you'll need to:
+
+1. Create an account at [Push Dashboard](https://dashboard.push.com)
+2. Set up your platform credentials (APNs for iOS, FCM for Android, VAPID for web)
+3. Register your first device
+4. Send your first push notification
 
 <Card
-  title="Plant Store Endpoints"
-  icon="leaf"
-  href="https://github.com/mintlify/starter/blob/main/api-reference/openapi.json"
+  title="Quick Start Guide"
+  icon="rocket"
+  href="/api-reference/quickstart"
 >
-  View the OpenAPI specification file
+  Follow our step-by-step guide to get started with Push API
 </Card>
 
 ## Authentication
 
-All API endpoints are authenticated using Bearer tokens and picked up from the specification file.
+All API endpoints are authenticated using Bearer tokens. Include your API key in the Authorization header:
 
-```json
-"security": [
-  {
-    "bearerAuth": []
-  }
-]
+```bash
+Authorization: Bearer YOUR_API_KEY
 ```
+
+<Note>
+  Keep your API key secure and never expose it in client-side code. Store it in environment variables or secure configuration management systems.
+</Note>
+
+## API Structure
+
+The Push API is organized into several key areas:
+
+- **Devices**: Register and manage user devices
+- **Messages**: Send and track push notifications
+- **Preferences**: Manage notification settings
+- **Webhooks**: Configure delivery tracking
+
+## Best Practices
+
+1. **Device Registration**
+   - Register devices as soon as users log in
+   - Update device tokens when they change
+   - Handle multiple devices per user
+
+2. **Message Sending**
+   - Keep messages concise and actionable
+   - Use categories for better organization
+   - Test notifications on all platforms
+
+3. **User Experience**
+   - Respect user preferences
+   - Provide clear opt-in/opt-out options
+   - Send notifications at appropriate times
+
+## Rate Limits
+
+The API implements rate limiting to ensure fair usage:
+
+- 100 requests per minute for device registration
+- 1000 requests per minute for sending messages
+- 100 requests per minute for preference updates
+
+<Note>
+  Contact support if you need higher rate limits for your use case.
+</Note>
+
+## Support
+
+Need help? We're here to assist you:
+
+- [API Reference](/api-reference)
+- [Community Forum](https://community.push.com)
+- [Support Email](mailto:support@push.com)
+- [Status Page](https://status.push.com)
